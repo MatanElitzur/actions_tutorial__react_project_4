@@ -1,8 +1,11 @@
 # actions_tutorial__react_project_4
-actions_tutorial__react_project_4
 
-This action project handle environment variables 
+# This action project handle environment variables & Secrets
+# Secrets can be store in two places:
+1. in gitgub ui in the organization account by clicking on the settings this is good when you have several repositories that uses the same secrets.
+2. In a specific repository click on the repository settings, under security click on secrets then click on actions
 
+#  environment variables
 In the code for example in data\database.js
 we are using environment variables like the following
 const clusterAddress = process.env.MONGODB_CLUSTER_ADDRESS;
