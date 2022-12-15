@@ -21,7 +21,8 @@ jobs:
       #MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017 #To run it on runs-on: ubuntu-latest when we not using container: tag
       MONGODB_USERNAME: root #${{ secrets.MONGODB_USERNAME }}
       MONGODB_PASSWORD: example #${{ secrets.MONGODB_PASSWORD }}
-      PORT: 8080
+      #PORT: 8080
+      PORT: 27017
     services: #services containers run in images(docker container) and not at runs-on, like ubuntu-latest
       mongodb:
         image: mongo #We can find it in docker hub https://hub.docker.com/_/mongo
