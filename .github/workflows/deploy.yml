@@ -5,6 +5,7 @@ on:
       - main
       - dev
 env: #Adding environment variables for all jobs or a job will overide it in job level
+  CACHE_KEY: node-deps
   MONGODB_DB_NAME: gha-demo
 jobs:
   test:
@@ -17,7 +18,7 @@ jobs:
       #env:  #we can add variables that the image needs
     env: #We can add here the environment variables for the test job
       MONGODB_CONNECTION_PROTOCOL: mongodb
-      MONGODB_CLUSTER_ADDRESS: mongodb #This must be the same value like in line 24 for establish network connextion   #cluster0.15pwqcc.mongodb.net
+      MONGODB_CLUSTER_ADDRESS: mongodb #This must be the same value like in line 27 for establish network connextion   #cluster0.15pwqcc.mongodb.net
       #MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017 #To run it on runs-on: ubuntu-latest when we not using container: tag
       MONGODB_USERNAME: root #${{ secrets.MONGODB_USERNAME }}
       MONGODB_PASSWORD: example #${{ secrets.MONGODB_PASSWORD }}
@@ -38,10 +39,10 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: npm-deps-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ env.CACHE_KEY }}-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm ci
-      - name: Run server
+      - name: Run server # requires MongoDB Atlas to accept requests from anywhere!
         run: npm start & npx wait-on http://127.0.0.1:$PORT #PORT is a job variable. we use $PORT in this way in ubuntu
       - name: Run tests
         run: npm test
@@ -54,5 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Output information
+        env:
+          PORT: 3000
         run: |        
           echo "MONGODB_DB_NAME: $MONGODB_DB_NAME" #we can use the MONGODB_DB_NAME in this way
