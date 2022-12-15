@@ -12,17 +12,19 @@ jobs:
     # The test job will execute only on the main barnch, this is what is configured at the environment: testing
     environment: testing # for reperence to settings/environment and then we get the secrets from the environment and not from the general repository secrets
     runs-on: ubuntu-latest
+    #container: node:16 #if we want to use docker container we a node image version 16
+    container: #Docker container
+      image: node:16 #The name of the image that we want to use. for example node:16
+      #env:  #we can add variables that the image needs
     env: #We can add here the environment variables for the test job
       MONGODB_CONNECTION_PROTOCOL: mongodb
-      MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017 #To run it on runs-on: ubuntu-latest when we not using container: tag
+      MONGODB_CLUSTER_ADDRESS: mongodb #This must be the same value like in line 27 for establish network connextion   #cluster0.15pwqcc.mongodb.net
       MONGODB_USERNAME: root #${{ secrets.MONGODB_USERNAME }}
       MONGODB_PASSWORD: example #${{ secrets.MONGODB_PASSWORD }}
       PORT: 8080
     services: #services containers run in images(docker container) and not at runs-on, like ubuntu-latest
       mongodb:
         image: mongo #We can find it in docker hub https://hub.docker.com/_/mongo
-        ports: #To run it on runs-on: ubuntu-latest when we not using container: tag
-          - 27017:27017 #To run it on runs-on: ubuntu-latest when we not using container: tag
         env: #The variables the images needs
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
