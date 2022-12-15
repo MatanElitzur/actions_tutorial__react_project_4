@@ -25,7 +25,8 @@ jobs:
         image: mongo #We can find it in docker hub https://hub.docker.com/_/mongo
         ports: #To run it on runs-on: ubuntu-latest when we not using container: tag
           - 27017:27017 #To run it on runs-on: ubuntu-latest, This is the port that is used by the container
-        env: #The variables the images needs
+        #env: #The variables the images needs
+        environment:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
       #matanservice: you can add more service containers
