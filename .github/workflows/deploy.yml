@@ -13,7 +13,8 @@ jobs:
     environment: testing # for reperence to settings/environment and then we get the secrets from the environment and not from the general repository secrets
     runs-on: ubuntu-latest
     env: #We can add here the environment variables for the test job
-      MONGODB_CONNECTION_PROTOCOL: mongodb
+      #MONGODB_CONNECTION_PROTOCOL: mongodb
+      MONGODB_CONNECTION_PROTOCOL: mongodb+srv
       MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017 #To run it on runs-on: ubuntu-latest when we not using container: tag and this address is used for connecting to the mongo container
       MONGODB_USERNAME: root
       #${{ secrets.MONGODB_USERNAME }}
