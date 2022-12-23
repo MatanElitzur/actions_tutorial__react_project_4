@@ -5,6 +5,7 @@
 # Docker
 Using docker container and services containers 
 # Secrets
+https://docs.github.com/en/actions/security-guides/encrypted-secrets
 After creating a a secret in github you can not see it again, but you can update it
 # Secrets can be store in two places:
 1. in gitgub ui in the organization account by clicking on the settings this is good when you have several repositories that uses the same secrets.
