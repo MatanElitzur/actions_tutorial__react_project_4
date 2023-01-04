@@ -1,3 +1,6 @@
+#Here we use node:16 container at line 17 and also a mongo service container
+#So here github give us automated network between the node container and the
+#Service container (via the tag mongodb, the name is not importent)
 name: Deployment with container
 on:
   push:
@@ -18,13 +21,16 @@ jobs:
       #env:  #we can add variables that the image needs
     env: #We can add here the environment variables for the test job
       MONGODB_CONNECTION_PROTOCOL: mongodb
-      MONGODB_CLUSTER_ADDRESS: mongodb #This must be the same value like in line 27 for establish network connextion   #cluster0.15pwqcc.mongodb.net
+      #MONGODB_CLUSTER_ADDRESS: cluster0.15pwqcc.mongodb.net
+      MONGODB_CLUSTER_ADDRESS: mongodb #This must be the same value like in line 26 for establish network connextion
+      #between the node:16 container and the mongo service container
       MONGODB_USERNAME: root #${{ secrets.MONGODB_USERNAME }}
       MONGODB_PASSWORD: example #${{ secrets.MONGODB_PASSWORD }}
       PORT: 8080
     services: #services containers run in images(docker container) and not at runs-on, like ubuntu-latest
       mongodb:
         image: mongo #We can find it in docker hub https://hub.docker.com/_/mongo
+        #Mongo db server & amobgo db database on top of it
         env: #The variables the images needs
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: example
