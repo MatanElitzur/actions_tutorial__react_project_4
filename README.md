@@ -14,15 +14,16 @@ After creating a a secret in github you can not see it again, but you can update
 #  environment variables
 In the code for example in data\database.js
 we are using environment variables like the following
-const clusterAddress = process.env.MONGODB_CLUSTER_ADDRESS;
-const dbUser = process.env.MONGODB_USERNAME;
-const dbPassword = process.env.MONGODB_PASSWORD;
-const dbName = process.env.MONGODB_DB_NAME;
+1. const clusterAddress = process.env.MONGODB_CLUSTER_ADDRESS;
+2. const dbUser = process.env.MONGODB_USERNAME;
+3. const dbPassword = process.env.MONGODB_PASSWORD;
+4. const dbName = process.env.MONGODB_DB_NAME;
 
 We need to pass those variables from the github action workflow
 
-# GitHub Actions also provides a couple of default environment variables that are set automatically:
+# environment variables
+GitHub Actions also provides a couple of default environment variables that are set automatically:
 
 https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
 
-# These environment variable can, for example, give you quick access to the repository to which the workflow belongs, the name of the event that triggered the workflow and many other things.
+These environment variable can, for example, give you quick access to the repository to which the workflow belongs, the name of the event that triggered the workflow and many other things.
